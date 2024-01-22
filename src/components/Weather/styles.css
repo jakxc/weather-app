@@ -1,0 +1,11 @@
+@import "../../App.css";
+
+.card {
+    width: 500px;
+    border: 5px solid var(--primary-color);
+    border-radius: 8px;
+}
+
+.card__img {
+    width: 200px;
+}

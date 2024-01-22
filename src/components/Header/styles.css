@@ -1,0 +1,11 @@
+@import "../../App.css";
+
+.header {
+    padding: 20px;
+}
+
+.form {
+    width: 500px;
+    max-width: 30%;
+    max-height: 40px;
+}
