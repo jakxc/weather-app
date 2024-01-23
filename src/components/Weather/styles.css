@@ -6,6 +6,14 @@
     border-radius: 8px;
 }
 
+.card__location {
+    font-size: 1.5rem;
+}
+
 .card__img {
-    width: 200px;
+    width: 175px;
+}
+
+.card__temp {
+    font-size: 5rem;
 }
