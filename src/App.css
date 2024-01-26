@@ -1,44 +1,52 @@
 
 :root {
-  --background-color: rgb(63, 63, 63);
-  --primary-color: rgb(224, 136, 92);
-  --primary-color-lite: rgba(224, 136, 92, 0.726);
-  --text-color-lite: rgb(228, 228, 228);
-  --text-color-dark: rgb(27, 27, 27);
+  --clr-primary: rgb(54, 110, 124);
+  --clr-white: rgb(228, 228, 228);
+  --clr-black: rgb(27, 27, 27);
+  --clr-grey: rgb(193, 193, 193);
   
-  --primary-font: 'Maven Pro', sans-serif;
+  --font-primary: 'Maven Pro', sans-serif;
 }
 
 body {
-  color: var(--text-color-lite);
-  background-color: var(--background-color);
-  font-family: var(--primary-font);
+  color: var(--clr-white);
+  font-family: var(--font-primary);
 }
 
 a {
   text-decoration: none;
 }
 
-input:focus {
-  border-color: var(--primary-color) !important;
-}
-
 button:hover {
-  background-color: var(--primary-color-lite) !important;
+  opacity: 90%;
 }
 
-.primary-color {
-  color: var(--primary-color);
+input:focus {
+  border-color: var(--clr-primary) !important;
 }
 
-.text-light {
-  color: var(--text-color-lite);
+.app {
+  width: 100vw;
+  height: 100vh;
+  background: url("./assets//images/background.jpg");
+  background-position: center;
+  background-size: 100vw auto;
 }
 
-.text-dark {
-  color: var(--text-color-dark);
+.color-primary {
+  color: var(--clr-primary);
 }
 
-.primary-background {
-  background-color: var(--primary-color);
+.text-white {
+  color: var(--clr-white);
 }
+
+.text-back {
+  color: var(--clr-black);
+}
+
+.background-primary {
+  background-color: var(--clr-primary);
+}
+
+

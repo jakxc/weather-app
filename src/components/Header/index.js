@@ -13,8 +13,7 @@ const Header = ({ onQueryChange }) => {
         onQueryChange(text)
     }
     return (
-        <header className="header | d-flex justify-content-between align-items-center">
-            <h1>Weather App</h1>
+        <header className="header | d-flex align-items-center">
             <form className="form d-flex gap-3">
                 <input 
                     className="form-control"
@@ -26,7 +25,7 @@ const Header = ({ onQueryChange }) => {
                     onChange={handleChange}
                 />
                 <button 
-                    className="btn | primary-background"
+                    className="background-primary | d-flex justify-content-center align-items-center py-1 px-2 rounded"
                     onClick={handleClick}
                 >
                         Search

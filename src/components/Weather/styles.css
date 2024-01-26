@@ -1,8 +1,8 @@
 @import "../../App.css";
 
 .card {
-    width: 500px;
-    border: 5px solid var(--primary-color);
+    width: 400px;
+    border: 5px solid var(--clr-primary);
     border-radius: 8px;
 }
 
@@ -11,9 +11,17 @@
 }
 
 .card__img {
-    width: 175px;
+    width: 150px;
+}
+
+.card__condition {
+    color: var(--clr-grey)
 }
 
 .card__temp {
     font-size: 5rem;
+}
+
+.info__icon {
+    width: 25px;
 }
