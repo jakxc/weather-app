@@ -13,8 +13,8 @@ const Header = ({ onQueryChange }) => {
         onQueryChange(text)
     }
     return (
-        <header className="header | d-flex align-items-center">
-            <form className="form d-flex gap-3">
+        <header className="header | d-flex justify-content-center align-items-center">
+            <form className="form | d-flex gap-3">
                 <input 
                     className="form-control"
                     type="search" 

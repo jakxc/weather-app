@@ -13,16 +13,12 @@ const Weather = ({ weather }) => {
     }
 
     const ForecastDelegate = ({ forecast }) => {
-        let currentTime = new Date();
         const forecastElements = forecast.map(el => {
-                return el["hour"].filter(e => {
-                    const date = new Date(e["time"]);
-                    return date > currentTime;
-                }).map(e => {
+                return el["hour"].map(e => {
                     const { time, condition, temp_c } = e;
                     const date = new Date(time);
                     const formattedTime = `${date.getHours() % 12 ? date.getHours() % 12 : 12} ${date.getHours() >= 12 ? "PM" : "AM"}`    
-                    return <div className="d-flex flex-column align-items-center">
+                    return <div className="forecast__delegate | d-flex flex-column justify-content-center align-items-center">
                         <div>{formattedTime}</div>
                         <img src={condition.icon}/>
                         <div>{temp_c}&#176;</div>
@@ -30,39 +26,41 @@ const Weather = ({ weather }) => {
                 })
         })
 
-        return <div className="d-flex flex-row gap-2 justify-content-center">
+        return <div className="w-100 d-flex flex-row gap-2 justify-content-center p-3 overflow-auto">
             {forecastElements}
         </div>
     }
 
     return (
         weather  
-        ? <div className="card | d-flex flex-column align-items-center px-3 py-4">
-            <img className="card__img" src={weather.current.condition.icon}/>
-            <div className="card__location">{weather.location.name}, {weather.location.country}</div>
-            <div className="card__temp fw-bold">{weather.current.temp_c}&#8451;</div>
-            <div className="card__condition">{weather.current.condition.text}</div>
-            <div className="d-flex justify-content-center gap-3 mt-2 mb-5"> 
-                <InfoDelegate 
-                    name="Humidity" 
-                    value={weather.current.humidity} 
-                    icon={humidityIcon} 
-                    unit="%" 
-                />
-                <InfoDelegate 
-                    name="Wind" 
-                    value={weather.current.wind_kph} 
-                    icon={windIcon}
-                    unit="km/hr" 
-                />
-                <InfoDelegate 
-                    name="Precipation" 
-                    value={weather.current.precip_mm} 
-                    icon={rainIcon}
-                    unit="mm" 
-                />
+        ? <div className="card | w-100 h-100 d-flex flex-column justify-content-between align-items-center pt-4 gap-3">
+            <div className="d-flex flex-column align-items-center gap-2 mb-3">
+                <img className="card__img" src={weather.current.condition.icon}/>
+                <div className="card__location">{weather.location.name}, {weather.location.country}</div>
+                <div className="card__temp fw-bold">{weather.current.temp_c}&#8451;</div>
+                <div className="card__condition">{weather.current.condition.text}</div>
+                <div className="d-flex justify-content-center gap-3"> 
+                    <InfoDelegate 
+                        name="Humidity" 
+                        value={weather.current.humidity} 
+                        icon={humidityIcon} 
+                        unit="%" 
+                    />
+                    <InfoDelegate 
+                        name="Wind" 
+                        value={weather.current.wind_kph} 
+                        icon={windIcon}
+                        unit="km/hr" 
+                    />
+                    <InfoDelegate 
+                        name="Precipation" 
+                        value={weather.current.precip_mm} 
+                        icon={rainIcon}
+                        unit="mm" 
+                    />
+                </div>
             </div>
-            <ForecastDelegate forecast={weather.forecast.forecastday}/>
+            <div className="forecast | w-100 h-100 pt-4 px-3"><ForecastDelegate forecast={weather.forecast.forecastday}/></div>
         </div> 
         : <div>Weather is not available for this location.</div>
     )

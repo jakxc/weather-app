@@ -1,10 +1,12 @@
 @import "../../App.css";
 
 .header {
-    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    height: 75px;
 }
 
 .form {
-    width: 400px;
+    width: 100%;
     height: 40px;
 }
