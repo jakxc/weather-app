@@ -13,7 +13,7 @@ function App() {
 
   const getCurrentWeatherByQuery = (myQuery) => {
     const API_KEY = process.env.REACT_APP_API_KEY;
-    const url = `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${myQuery || "Brisbane"}&aqi=no`;
+    const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${myQuery || "Brisbane"}&days=1&aqi=no&alerts=no`;
     return fetch(url)
       .then(res => res.json())
   }

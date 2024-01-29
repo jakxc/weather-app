@@ -4,11 +4,34 @@ import rainIcon from "../../assets/images/raining.png";
 import windIcon from "../../assets/images/wind.png";
 
 const Weather = ({ weather }) => {
-    const InfoDelegate = ({name, value, icon, unit}) => {
+    const InfoDelegate = ({ name, value, icon, unit }) => {
         return <div className="d-flex flex-column align-items-center px-3 py-2">
             <img src={icon} className="info__icon" />
             <div>{name}</div>
             <div className="fw-bold">{value}{unit}</div>
+        </div>
+    }
+
+    const ForecastDelegate = ({ forecast }) => {
+        let currentTime = new Date();
+        const forecastElements = forecast.map(el => {
+                return el["hour"].filter(e => {
+                    const date = new Date(e["time"]);
+                    return date > currentTime;
+                }).map(e => {
+                    const { time, condition, temp_c } = e;
+                    const date = new Date(time);
+                    const formattedTime = `${date.getHours() % 12 ? date.getHours() % 12 : 12} ${date.getHours() >= 12 ? "PM" : "AM"}`    
+                    return <div className="d-flex flex-column align-items-center">
+                        <div>{formattedTime}</div>
+                        <img src={condition.icon}/>
+                        <div>{temp_c}&#176;</div>
+                    </div>
+                })
+        })
+
+        return <div className="d-flex flex-row gap-2 justify-content-center">
+            {forecastElements}
         </div>
     }
 
@@ -19,7 +42,7 @@ const Weather = ({ weather }) => {
             <div className="card__location">{weather.location.name}, {weather.location.country}</div>
             <div className="card__temp fw-bold">{weather.current.temp_c}&#8451;</div>
             <div className="card__condition">{weather.current.condition.text}</div>
-            <div className="d-flex justify-content-center gap-3 mt-2"> 
+            <div className="d-flex justify-content-center gap-3 mt-2 mb-5"> 
                 <InfoDelegate 
                     name="Humidity" 
                     value={weather.current.humidity} 
@@ -39,6 +62,7 @@ const Weather = ({ weather }) => {
                     unit="mm" 
                 />
             </div>
+            <ForecastDelegate forecast={weather.forecast.forecastday}/>
         </div> 
         : <div>Weather is not available for this location.</div>
     )

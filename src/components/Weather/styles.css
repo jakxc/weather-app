@@ -1,7 +1,7 @@
 @import "../../App.css";
 
 .card {
-    width: 400px;
+    width: 500px;
     border: 5px solid var(--clr-primary);
     border-radius: 8px;
 }

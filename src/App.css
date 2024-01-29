@@ -30,7 +30,8 @@ input:focus {
   height: 100vh;
   background: url("./assets//images/background.jpg");
   background-position: center;
-  background-size: 100vw auto;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .color-primary {
