@@ -1,7 +1,30 @@
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import "./styles.css";
 import humidityIcon from "../../assets/images/humidity.png";
 import rainIcon from "../../assets/images/raining.png";
 import windIcon from "../../assets/images/wind.png";
+
+const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 12
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 8
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 7
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 6
+    }
+  };
+
 
 const Weather = ({ weather }) => {
     const InfoDelegate = ({ name, value, icon, unit }) => {
@@ -12,29 +35,39 @@ const Weather = ({ weather }) => {
         </div>
     }
 
-    const ForecastDelegate = ({ forecast }) => {
+    const ForecastRow = ({ forecast }) => {
+        const currentDate = new Date();
         const forecastElements = forecast.map(el => {
-                return el["hour"].map(e => {
-                    const { time, condition, temp_c } = e;
-                    const date = new Date(time);
-                    const formattedTime = `${date.getHours() % 12 ? date.getHours() % 12 : 12} ${date.getHours() >= 12 ? "PM" : "AM"}`    
-                    return <div className="forecast__delegate | d-flex flex-column justify-content-center align-items-center">
-                        <div>{formattedTime}</div>
-                        <img src={condition.icon}/>
-                        <div>{temp_c}&#176;</div>
-                    </div>
-                })
+            return el["hour"].map(e => {
+                const { time, condition, temp_c } = e;
+                const date = new Date(time);
+
+                const styles = {
+                    backgroundColor: currentDate.getHours() === date.getHours() 
+                    ? "rgba(54, 110, 124, 0.4)" 
+                    : "rgba(54, 110, 124, 0.2)"
+                }
+    
+                const formattedTime = `${date.getHours() % 12 ? date.getHours() % 12 : 12} ${date.getHours() >= 12 ? "PM" : "AM"}`    
+                return <div style={styles} className="forecast__delegate | d-flex flex-column justify-content-center align-items-center me-2 p-2">
+                    <div className="forecast__delegate__time">{date.getHours() === currentDate.getHours() ? "Now" : formattedTime}</div>
+                    <img src={condition.icon} className="mb-3" />
+                    <div className="forecast__delegate__temp">{temp_c}&#176;</div>
+                </div>
+            })
         })
 
-        return <div className="w-100 d-flex flex-row gap-2 justify-content-center p-3 overflow-auto">
+        console.log(forecastElements);
+
+        return <Carousel responsive={responsive} className="w-100 d-flex flex-row justify-content-center p-3">
             {forecastElements}
-        </div>
+        </Carousel>
     }
 
     return (
         weather  
-        ? <div className="card | w-100 h-100 d-flex flex-column justify-content-between align-items-center pt-4 gap-3">
-            <div className="d-flex flex-column align-items-center gap-2 mb-3">
+        ? <div className="card | w-100 d-flex flex-column justify-content-between align-items-center pt-3 gap-2">
+            <div className="h-100 d-flex flex-column align-items-center gap-2">
                 <img className="card__img" src={weather.current.condition.icon}/>
                 <div className="card__location">{weather.location.name}, {weather.location.country}</div>
                 <div className="card__temp fw-bold">{weather.current.temp_c}&#8451;</div>
@@ -60,7 +93,7 @@ const Weather = ({ weather }) => {
                     />
                 </div>
             </div>
-            <div className="forecast | w-100 h-100 pt-4 px-3"><ForecastDelegate forecast={weather.forecast.forecastday}/></div>
+            <div className="forecast | w-100 d-flex justify-content-center align-items-center pt-4 px-3"><ForecastRow forecast={weather.forecast.forecastday}/></div>
         </div> 
         : <div>Weather is not available for this location.</div>
     )

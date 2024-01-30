@@ -11,7 +11,7 @@
 }
 
 .card__img {
-    width: 100px;
+    width: 175px;
 }
 
 .card__condition {
@@ -19,7 +19,7 @@
 }
 
 .card__temp {
-    font-size: 3rem;
+    font-size: 3.5rem;
 }
 
 .info__icon {
@@ -32,15 +32,25 @@
 }
 
 .forecast {
-    background-color: rgba(54, 110, 124, 0.5);
+    height: 400px;
+    max-height: 100%;
+    background-color: rgb(193, 193, 193, 0.2);
     border-top-right-radius: 40px 40px;
     border-top-left-radius: 40px 40px;
-
-    -ms-overflow-style: none; /* for Internet Explorer, Edge */
-    scrollbar-width: none; /* for Firefox */
-    overflow-x: scroll;
+    box-shadow: rgba(54, 110, 124, 0.5) 0px 5px 15px;
 }
+
 
 .forecast__delegate {
     min-width: 50px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.forecast__delegate__time {
+    font-size: 0.9rem;
+}
+
+.forecast__delegate__temp {
+    font-size: 1.2rem;
 }

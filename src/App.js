@@ -30,7 +30,7 @@ function App() {
   }, [query]);
 
   return (
-    <div className="app | d-flex flex-column align-items-center pt-2 px-2">
+    <div className="app | d-flex flex-column align-items-center gap-3 pt-2 px-2">
       <Header 
         onQueryChange={(myQuery) => setQuery(myQuery)}
       />
